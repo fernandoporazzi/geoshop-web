@@ -1,6 +1,7 @@
 // app/controllers/instrumentation.js
 
 const url = require('url');
+const util = require('../util/geolocation.js');
 
 const imgdata = [
   0x47,0x49, 0x46,0x38, 0x39,0x61, 0x01,0x00, 0x01,0x00, 0x80,0x00, 0x00,0xFF, 0xFF,0xFF,
@@ -17,6 +18,9 @@ module.exports = {
     console.log(req.query.un);
     console.log(req.query.ue);
     console.log(req.query.login);
+
+    let ip = req.connection.remoteAddress;
+    console.log(util.getGeolocation(ip));
 
     res.writeHead(200, {
       'Content-Type': 'image/gif',
