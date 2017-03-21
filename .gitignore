@@ -1,2 +1,4 @@
 node_modules
 *.log
+
+app/public/dist
