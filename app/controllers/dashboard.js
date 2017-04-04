@@ -1,6 +1,5 @@
 // app/controllers/dashboard.js
 
-
 module.exports = {
 
   index: (req, res, next) => {
