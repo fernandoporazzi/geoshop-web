@@ -3,4 +3,8 @@ extends layout
 block content
   .w35.h100.fl
     h1= title
+    form(action="/login" method="POST")
+      input(name="email" type="text" placeholder="email")
+      input(name="password" type="password" placeholder="senha")
+      button(type="submit") Entrar
   .w65.h100.fl.bg-c.bg-nr.bgs-cover.login-banner
