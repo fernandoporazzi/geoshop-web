@@ -29,6 +29,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.0",
     "helmet": "^3.4.0",
+    "mongo-oplog": "^2.0.2",
     "mongoose": "^4.8.1",
     "morgan": "^1.7.0",
     "nib": "^1.1.2",
