@@ -15,6 +15,7 @@ const imgbuf = new Buffer(imgdata);
 module.exports = {
 
   index: (req, res, next) => {
+
     console.log(req.query.p);
     console.log(req.query.un);
     console.log(req.query.ue);

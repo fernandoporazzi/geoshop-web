@@ -16,3 +16,14 @@ block content
           a(href="#") icon 3
     section
       h1= title
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js")
+  script.
+    var socket = io.connect('http://localhost:3000/map')
+    socket.on('clickeventresponse', function(data) {
+      console.log(data);
+    });
+    var count = 0;
+    document.querySelector('h1').addEventListener('click', function() {
+      socket.emit('clickevent', {count: count++})
+    });

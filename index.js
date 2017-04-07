@@ -9,8 +9,14 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
+// const http = require('http');
+
 
 const app = express();
+const server = app.listen(3000);
+const io = require('socket.io').listen(server);
+
+require('./app/services/socketIoStreaming')(io);
 
 const configDB = require('./config/database.js');
 
