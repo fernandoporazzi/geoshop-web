@@ -1,4 +1,10 @@
 extends layout
 
 block content
-  h1= title
+  .w-35.h-100.fl
+    h1= title
+    form(action="/signup" method="POST")
+      input(name="email" type="text" placeholder="email")
+      input(name="password" type="password" placeholder="senha")
+      button(type="submit") Cadastrar
+  .w-65.h-100.fl.bg-c.bg-nr.bgs-cover.login-banner

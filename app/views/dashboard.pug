@@ -4,6 +4,7 @@ block content
   header.w-100.h65.bgc2
     .w80.bgc3.h-100.fl GeoShop
     .fl
+      span= userName
       a(href="/logout") sair
   main.w-100.mi-h-100.bgc1
     aside.w80.vh100.bgc0.fl
@@ -19,11 +20,18 @@ block content
 
   script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js")
   script.
+    var userName = '#{userName}';
+  script.
     var socket = io.connect('http://localhost:3000/map')
     socket.on('clickeventresponse', function(data) {
       console.log(data);
     });
+
+    socket.on('startListeningToOnlineCollections', function(data) {
+      console.log(data);
+    });
+
     var count = 0;
     document.querySelector('h1').addEventListener('click', function() {
-      socket.emit('clickevent', {count: count++})
+      socket.emit('clickevent', {userName:  userName})
     });

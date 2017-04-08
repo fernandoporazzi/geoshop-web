@@ -25,9 +25,7 @@ module.exports = {
       session: 'abc123'
     });
 
-    online.save(function(err) {
-      if (err) throw err;
-    })
+    let p = online.save();
 
     // let ip = req.connection.remoteAddress;
     // console.log(util.getGeolocation(ip));

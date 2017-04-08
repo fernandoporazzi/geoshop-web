@@ -4,7 +4,8 @@ module.exports = {
 
   index: (req, res, next) => {
     res.render('dashboard', {
-      title: 'GeoShop - Dashboard'
+      title: 'GeoShop - Dashboard',
+      userName: req.user.name
     });
   }
 

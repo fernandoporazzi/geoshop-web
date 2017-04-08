@@ -9,23 +9,21 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
-// const http = require('http');
-
 
 const app = express();
 const server = app.listen(3000);
-const io = require('socket.io').listen(server);
-
+const io = require('socket.io')(server);
 require('./app/services/socketIoStreaming')(io);
 
 const configDB = require('./config/database.js');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url);
 
 require('./config/passport')(passport);
 
 app.use(helmet());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
