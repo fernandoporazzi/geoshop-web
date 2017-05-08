@@ -4,11 +4,10 @@
   "description": "Application containing the dashboard for GeoShop",
   "main": "index.js",
   "scripts": {
-    "server": "node ./bin/www",
+    "server": "node index.js",
     "stylus:dev": "stylus -c -w -u nib app/public/src/styl/main.styl -o app/public/dist/css",
     "stylus:prd": "stylus -c -u nib app/public/src/styl/main.styl -o app/public/dist/css",
     "start": "npm run stylus:prd && npm run server",
-    "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
