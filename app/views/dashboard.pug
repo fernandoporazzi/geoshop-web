@@ -29,6 +29,10 @@ block content
       console.log(data);
     });
 
+    socket.on('updateMap', function(data) {
+      console.log('updateMap', data);
+    })
+
     var count = 0;
     document.querySelector('h1').addEventListener('click', function() {
       socket.emit('clickevent', {userName:  userName})

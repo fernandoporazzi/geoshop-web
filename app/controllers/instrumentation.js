@@ -16,13 +16,15 @@ module.exports = {
 
   index: (req, res, next) => {
 
-    console.log(req.query.p);
-    console.log(req.query.un);
-    console.log(req.query.ue);
-    console.log(req.query.login);
+    // console.log(req.query.p);
+    // console.log(req.query.un);
+    // console.log(req.query.ue);
+    // console.log(req.query.login);
+    // console.log(req.query.store);
 
     online = new OnlineModel({
-      session: 'abc123'
+      session: 'abc123',
+      store: req.query.store
     });
 
     let p = online.save();

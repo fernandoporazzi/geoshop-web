@@ -4,6 +4,9 @@ var onlineSchema = mongoose.Schema({
   session: {
     type: String
   },
+  store: {
+    type: String
+  },
   created_at: {
     type: Date,
     expires: 180
