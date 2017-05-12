@@ -21,13 +21,33 @@ module.exports = {
     // console.log(req.query.ue);
     // console.log(req.query.login);
     // console.log(req.query.store);
+    // console.log(req.query.s)
 
-    online = new OnlineModel({
-      session: 'abc123',
-      store: req.query.store
+    OnlineModel.findOne({session: req.query.s}, (err, doc) => {
+      if (err) return next();
+
+      // update document date
+      if (doc) {
+        console.log('document exists and should be updated');
+        let d = new Date();
+
+        doc.created_at = d;
+        doc.save();
+        return;
+      }
+
+      // create new online document
+      if (!doc) {
+        console.log('doesnt exists and will be created');
+        online = new OnlineModel({
+          session: req.query.s,
+          store: req.query.store
+        });
+
+        online.save();
+        return;
+      }
     });
-
-    let p = online.save();
 
     // let ip = req.connection.remoteAddress;
     // console.log(util.getGeolocation(ip));
