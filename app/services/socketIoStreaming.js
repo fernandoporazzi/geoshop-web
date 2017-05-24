@@ -1,7 +1,7 @@
 const OnlineModel = require('../models/online.js');
 
 function startListeningToOnlineCollections(socket) {
-  socket.emit('startListeningToOnlineCollections', {data: `it will fetch the database for the user`});
+  // socket.emit('startListeningToOnlineCollections', {data: `it will fetch the database for the user`});
   OnlineModel.find({'store': 'magazineluiza'}, (err, docs) => {
     if (err != null) {
       return log.info('Error while fetching initial data');
@@ -12,7 +12,7 @@ function startListeningToOnlineCollections(socket) {
 }
 
 module.exports = (io) => {
-  var map =io
+  var map = io
     .of('/map')
     .on('connection', function(socket) {
       startListeningToOnlineCollections(socket);
