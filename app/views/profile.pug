@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  include includes/header.pug
+
+  main.w-100.mi-h-100.bgc1.p15
+    section
+      h1.mt35.mb30= title
+      .w200.bgc0.fl.br7.p10
+        ul
+          li
+            a(href="/profile/updatestore") Alterar loja
+          li
+            a(href="/profile/updatepassword") Alterar senha
+      .bgc0.fr.br7.p10.main-content-wrapper editar perfil

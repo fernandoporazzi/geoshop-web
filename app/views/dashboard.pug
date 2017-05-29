@@ -1,42 +1,25 @@
 extends layout
 
 block content
-  header.w-100.h65.bgc0
-    .w80.bgc0.h-100.fl GeoShop
-    .h-100
-      ul.fl.h-100.fs13.fwb.c3
-        li.h-100.fl.dashboard-nav-active
-          a(href="/dashboard/" class="p25 fl") Dashboard
-        li.h-100.fl
-          a(href="/map/" class="p25 fl") Map
-      .fr.p25.fs13
-        span= userName
-        a(href="/logout" class="ml20") sair
+  include includes/header.pug
+
   main.w-100.mi-h-100.bgc1.p15
     section
       h1.mt35.mb30= title
       .w200.bgc0.fl.br7.p10 oi
-      .bgc0.fr.br7.p10.dashboard-map-wrapper map
+      .bgc0.fr.br7.p10.main-content-wrapper map
 
 block js
   script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js")
   script.
-    var userName = '#{userName}';
-  script.
-    var socket = io.connect('http://localhost:3000/map')
-    socket.on('clickeventresponse', function(data) {
-      console.log(data);
-    });
+    var socket = io.connect('http://localhost:3000/map');
 
-    socket.on('startListeningToOnlineCollections', function(data) {
-      console.log(data);
-    });
+    socket.emit('getOnlineUsers', {storeId: GeoShop.storeId});
 
-    socket.on('updateMap', function(data) {
+    socket.on('updateOnlineUsers', function(data) {
       console.log('updateMap', data);
-    })
-
-    var count = 0;
-    document.querySelector('h1').addEventListener('click', function() {
-      socket.emit('clickevent', {userName:  userName})
     });
+
+    setInterval(function() {
+      socket.emit('getOnlineUsers', {storeId: GeoShop.storeId});
+    }, 60000);

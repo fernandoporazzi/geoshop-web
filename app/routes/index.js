@@ -5,6 +5,7 @@ const instrumentationController = require('../controllers/instrumentation.js');
 const dashboardController = require('../controllers/dashboard.js');
 const loginController = require('../controllers/login.js');
 const signupController = require('../controllers/signup.js');
+const profileController = require('../controllers/profile.js');
 
 
 module.exports = function(app, passport) {
@@ -14,6 +15,10 @@ module.exports = function(app, passport) {
   app.get('/', homeController.index);
 
   app.get('/dashboard', isLoggedIn, dashboardController.index);
+
+  app.get('/profile', isLoggedIn, profileController.index);
+  app.get('/profile/updatestore', isLoggedIn, profileController.updatestore);
+  app.post('/profile/updatestore', isLoggedIn, profileController.saveStore);
 
   app.get('/login', loginController.index);
 
@@ -35,7 +40,7 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
-  
+
 };
 
 function isLoggedIn(req, res, next) {

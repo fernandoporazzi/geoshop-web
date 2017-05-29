@@ -1,0 +1,14 @@
+mixin item(title, url)
+  li(class="h-100 fl")
+    a(href=url, class="p25 fl")= title
+
+header.w-100.h65.bgc0
+  .w80.bgc0.h-100.fl GeoShop
+  .h-100
+    ul.fl.h-100.fs13.fwb.c3
+      +item('Dashboard', '/dashboard')
+      +item('Perfil', '/profile')
+
+    .fr.p25.fs13
+      span= storeName
+      a(href="/logout" class="ml20") sair

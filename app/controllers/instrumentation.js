@@ -20,7 +20,7 @@ module.exports = {
     // console.log(req.query.un);
     // console.log(req.query.ue);
     // console.log(req.query.login);
-    // console.log(req.query.store);
+    // console.log(req.query.storeId);
     // console.log(req.query.s)
 
     OnlineModel.findOne({session: req.query.s}, (err, doc) => {
@@ -41,7 +41,7 @@ module.exports = {
         console.log('doesnt exists and will be created');
         online = new OnlineModel({
           session: req.query.s,
-          store: req.query.store
+          storeId: req.query.storeId
         });
 
         online.save();

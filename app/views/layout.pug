@@ -4,6 +4,14 @@ html
     meta(charset="utf-8")
     link(rel="stylesheet" href="/css/main.css")
     title= title
+
+    if isAuthenticated
+      script.
+        var GeoShop = {
+          storeId: '#{storeId}',
+          storeName: '#{storeName}'
+        };
+
   body
     .w-100.vh100.fl
       block content

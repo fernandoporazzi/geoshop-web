@@ -4,7 +4,7 @@ var onlineSchema = mongoose.Schema({
   session: {
     type: String
   },
-  store: {
+  storeId: {
     type: String
   },
   created_at: {
