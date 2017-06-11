@@ -13,6 +13,30 @@ const imgdata = [
 
 const imgbuf = new Buffer(imgdata);
 
+function getCartObjects(query) {
+  if (!query || query === '') return [];
+
+  let cartData = [];
+  let entries = query.split('|');
+  
+  for (let i = 0; i < entries.length; i++) {
+    const self = entries[i];
+    const props = self.split(';');
+    let obj = {};
+
+    for (let j = 0; j < props.length; j++) {
+      const arr = props[j].split(':');
+      obj[arr[0]] = arr[1];
+    }
+
+    cartData = cartData.concat(obj);
+  }
+
+  console.log(cartData);
+
+  return cartData;
+}
+
 module.exports = {
 
   index: (req, res, next) => {
@@ -27,7 +51,34 @@ module.exports = {
     // req.query.lng = longitude
     // req.query.c =  cart
 
-    console.log(req.query.c);
+    SessionModel.findOne({session: req.query.s},(err, doc) => {
+      if (err) return next();
+
+      const cartData = getCartObjects(req.query.c);
+
+      if (doc) {
+        // update document
+        console.log('update session document');
+        return;
+      }
+
+      if (!doc) {
+        console.log('create new session document');
+        let session = new SessionModel({
+          session: req.query.s,
+          storeId: req.query.storeId,
+          userName: req.query.un,
+          userEmail: req.query.ue,
+          lat: req.query.lat,
+          lng: req.query.lng,
+          cart: cartData,
+          navigation: [req.query.p],
+          completed: req.query.completed || false
+        });
+
+        session.save();
+      }
+    });
 
     OnlineModel.findOne({session: req.query.s}, (err, doc) => {
       if (err) return next();
