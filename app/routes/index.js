@@ -15,6 +15,7 @@ module.exports = function(app, passport) {
   app.get('/', homeController.index);
 
   app.get('/dashboard', isLoggedIn, dashboardController.index);
+  app.get('/dashboard/:session', dashboardController.getSession);
 
   app.get('/profile', isLoggedIn, profileController.index);
   app.get('/profile/updatestore', isLoggedIn, profileController.updatestore);

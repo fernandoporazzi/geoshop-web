@@ -37,7 +37,12 @@ function addMarkers(data) {
       latLng = new google.maps.LatLng(self.lat, self.lng),
       marker = new google.maps.Marker({
         position: latLng,
-        title: 'click here'
+        title: 'click here',
+        session: self.session
+      });
+
+      marker.addListener('click', function() {
+        getInformationBySession(this.session);
       });
 
       markersArray.push(marker);
@@ -61,6 +66,16 @@ function initMap() {
     center: {lat: -34.397, lng: 150.644},
     zoom: 10
   });
+}
+
+function getInformationBySession(session) {
+  fetch('/dashboard/'+session)
+    .then(function(resp) {
+      return resp.json();
+    })
+    .then(function(data) {
+      console.log('server data', data);
+    })
 }
 
 getOnlineUsers();
