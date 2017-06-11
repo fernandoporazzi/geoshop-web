@@ -10,6 +10,12 @@ var onlineSchema = mongoose.Schema({
   created_at: {
     type: Date,
     expires: 180
+  },
+  lat: {
+    type: String
+  },
+  lng: {
+    type: String,
   }
 });
 

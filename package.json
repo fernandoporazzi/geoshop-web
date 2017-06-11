@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "server": "node index.js",
-    "stylus:dev": "stylus -c -w -u nib app/public/src/styl/main.styl -o app/public/dist/css",
-    "stylus:prd": "stylus -c -u nib app/public/src/styl/main.styl -o app/public/dist/css",
+    "stylus": "stylus -c -w -u nib app/public/src/styl/main.styl -o app/public/dist/css",
+    "js": "gulp watch",
+    "buildfront": "gulp js && stylus -c -u nib app/public/src/styl/main.styl -o app/public/dist/css",
     "start": "npm run stylus:prd && npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,7 +36,12 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta10",
-    "socket.io": "^1.7.3",
+    "socket.io": "^1.7.4",
     "stylus": "^0.54.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.0"
   }
 }

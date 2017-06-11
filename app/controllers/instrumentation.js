@@ -22,6 +22,8 @@ module.exports = {
     // console.log(req.query.login);
     // console.log(req.query.storeId);
     // console.log(req.query.s)
+    // console.log(req.query.lat)
+    // console.log(req.query.lng)
 
     OnlineModel.findOne({session: req.query.s}, (err, doc) => {
       if (err) return next();
@@ -41,7 +43,9 @@ module.exports = {
         console.log('doesnt exists and will be created');
         online = new OnlineModel({
           session: req.query.s,
-          storeId: req.query.storeId
+          storeId: req.query.storeId,
+          lat: req.query.lat,
+          lng: req.query.lng,
         });
 
         online.save();

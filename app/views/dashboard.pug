@@ -6,20 +6,17 @@ block content
   main.w-100.mi-h-100.bgc1.p15
     section
       h1.mt35.mb30= title
-      .w200.bgc0.fl.br7.p10 oi
-      .bgc0.fr.br7.p10.main-content-wrapper map
+      .w200.bgc0.fl.br7.p10
+        .w-100
+          p(class="fs13") Usuários online
+          p(id="online-qty", class="fs25") 0
+
+        .w-100.mt25
+          p(class="fs13") Valor total do carrinho
+          p(id="cart-total", class="fs25") R$ 0
+      .bgc0.fr.br7.p10.main-content-wrapper.map#map map
 
 block js
   script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js")
-  script.
-    var socket = io.connect('http://localhost:3000/map');
-
-    socket.emit('getOnlineUsers', {storeId: GeoShop.storeId});
-
-    socket.on('updateOnlineUsers', function(data) {
-      console.log('updateMap', data);
-    });
-
-    setInterval(function() {
-      socket.emit('getOnlineUsers', {storeId: GeoShop.storeId});
-    }, 60000);
+  script(async, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPhovzX-DEJDejWHfg2iQxm9_I45Bi2kA&callback=initMap")
+  script(src="/js/dashboard.js")
