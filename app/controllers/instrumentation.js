@@ -3,6 +3,7 @@
 const url = require('url');
 const util = require('../util/geolocation.js');
 const OnlineModel = require('../models/online.js');
+const SessionModel = require('../models/session.js');
 
 const imgdata = [
   0x47,0x49, 0x46,0x38, 0x39,0x61, 0x01,0x00, 0x01,0x00, 0x80,0x00, 0x00,0xFF, 0xFF,0xFF,
@@ -16,14 +17,17 @@ module.exports = {
 
   index: (req, res, next) => {
 
-    // console.log(req.query.p);
-    // console.log(req.query.un);
-    // console.log(req.query.ue);
-    // console.log(req.query.login);
-    // console.log(req.query.storeId);
-    // console.log(req.query.s)
-    // console.log(req.query.lat)
-    // console.log(req.query.lng)
+    // req.query.p = page
+    // req.query.un = username
+    // req.query.ue = useremail
+    // req.query.login = if user is logged, true or false
+    // req.query.storeId = storeId - mongoid
+    // req.query.s = session
+    // req.query.lat = latitude
+    // req.query.lng = longitude
+    // req.query.c =  cart
+
+    console.log(req.query.c);
 
     OnlineModel.findOne({session: req.query.s}, (err, doc) => {
       if (err) return next();
