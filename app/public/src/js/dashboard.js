@@ -22,7 +22,7 @@ function getOnlineUsers() {
 
   setInterval(function() {
     socket.emit('getOnlineUsers', {storeId: storeId});
-  }, 60000);
+  }, 30000);
 }
 
 function centerMap(data) {

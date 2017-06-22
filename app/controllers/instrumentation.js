@@ -18,7 +18,7 @@ function getCartObjects(query) {
 
   let cartData = [];
   let entries = query.split('|');
-  
+
   for (let i = 0; i < entries.length; i++) {
     const self = entries[i];
     const props = self.split(';');
@@ -31,8 +31,6 @@ function getCartObjects(query) {
 
     cartData = cartData.concat(obj);
   }
-
-  console.log(cartData);
 
   return cartData;
 }
@@ -57,8 +55,18 @@ module.exports = {
       const cartData = getCartObjects(req.query.c);
 
       if (doc) {
-        // update document
         console.log('update session document');
+        doc.userName = req.query.un;
+        doc.userEmail = req.query.ue;
+        doc.cart = cartData;
+
+        if (doc.navigation[doc.navigation.length - 1] != req.query.p) {
+          doc.navigation = doc.navigation.concat(req.query.p);
+        }
+
+        doc.completed = req.query.completed || false;
+
+        doc.save();
         return;
       }
 
@@ -85,7 +93,7 @@ module.exports = {
 
       // update document date
       if (doc) {
-        console.log('document exists and should be updated');
+        console.log('update online document');
         let d = new Date();
 
         doc.created_at = d;
@@ -95,7 +103,7 @@ module.exports = {
 
       // create new online document
       if (!doc) {
-        console.log('doesnt exists and will be created');
+        console.log('create new online document');
         online = new OnlineModel({
           session: req.query.s,
           storeId: req.query.storeId,

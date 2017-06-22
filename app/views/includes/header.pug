@@ -3,7 +3,8 @@ mixin item(title, url)
     a(href=url, class="p25 fl")= title
 
 header.w-100.h65.bgc0
-  .w80.bgc0.h-100.fl GeoShop
+  .w200.bgc0.h-100.fl.p10
+    img(src="/img/logo.png" class="w-100")
   .h-100
     ul.fl.h-100.fs13.fwb.c3
       +item('Dashboard', '/dashboard')

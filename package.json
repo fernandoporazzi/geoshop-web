@@ -8,7 +8,7 @@
     "stylus": "stylus -c -w -u nib app/public/src/styl/main.styl -o app/public/dist/css",
     "js": "gulp watch",
     "buildfront": "gulp js && stylus -c -u nib app/public/src/styl/main.styl -o app/public/dist/css",
-    "start": "npm run stylus:prd && npm run server",
+    "start": "npm run buildfront && npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

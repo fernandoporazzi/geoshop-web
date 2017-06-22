@@ -9,7 +9,7 @@ var onlineSchema = mongoose.Schema({
   },
   created_at: {
     type: Date,
-    expires: 180
+    expires: 120
   },
   lat: {
     type: String
