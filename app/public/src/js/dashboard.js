@@ -1,6 +1,14 @@
 var map,
   markersArray = [];
 
+function bindEvents() {
+  document.querySelector('.overlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.add('none');
+    }
+  }, false);
+}
+
 function getOnlineUsers() {
   var socket = io.connect('http://localhost:3000/map'),
     storeId = GeoShop.storeId,
@@ -74,8 +82,38 @@ function getInformationBySession(session) {
       return resp.json();
     })
     .then(function(data) {
-      console.log('server data', data);
+      openSessionModal(data);
     })
 }
 
+function openSessionModal(data) {
+  console.log('open modal', data)
+  var htmlToInject = '<p><strong>Nome do usuário:</strong> '+data.userName+'</p>'+
+    '<p><strong>Email do usuário:</strong> '+ data.userEmail+'</p>'+
+    '<p><strong>Localização:</strong> '+data.lat + '/'+ data.lng +'</p>'+
+    '<p><strong>Navegação:</strong> '+ data.navigation.join(' -> ') +'</p>'+
+    '<p><strong>Carrinho:</strong> <ul>' + getModalCartInfo(data.cart) + '</ul></p>';
+
+  document.querySelector('.overlay-main').innerHTML = htmlToInject;
+  document.querySelector('.overlay').classList.remove('none');
+}
+
+function getModalCartInfo(cart) {
+  var liArray = [];
+
+  for (var i = 0; i < cart.length; i++) {
+    var li = '<li>'+
+      '<div><strong>Código do produto:</strong> '+ cart[i].code +'</div>'+
+      '<div><strong>Nome do produto:</strong> '+ cart[i].name +'</div>'+
+      '<div><strong>Quantidade:</strong> '+ cart[i].quantity +'</div>'+
+      '<div><strong>Preço do produto:</strong> '+ cart[i].price +'</div>'+
+    '</li>';
+
+    liArray.push(li);
+  }
+
+  return liArray.join('');
+}
+
 getOnlineUsers();
+bindEvents();
