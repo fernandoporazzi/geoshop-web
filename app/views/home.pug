@@ -1,10 +1,18 @@
 extends layout
 
 block content
-  header(class="w-100 bgc1 h-100")
+  header(class="w-100 bgc1 tc h-100 home-header")
     .w-100.h65.tr.p15
       a(href="/login" class="tdu-hover") entrar
       a(href="/signup", class="ml20 tdu-hover") cadastrar
-    h1(class="tc")= title
+    h1(class="tc home-logo")
+      img(src="img/logo.png", alt="GeoShop")
 
-  main teste
+    h3.tc Intenções de compras por geolocalização
+
+    a(href="#about" title="Saiba Mais" class="home-know-more") Saiba mais
+
+  main
+    section.tc.home-about#about
+      h2 Sobre
+      p Saiba quem são seus clientes. Saiba quais são os seus interesses e o local exato de cada potencial comprador. O GeoShop usa a localização do usuário para mostrar em um mapa, em tempo real, cada interação dos seus clientes, o que eles já adicionaram no carrinho ou então o produto que está vendo!
