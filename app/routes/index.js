@@ -6,6 +6,7 @@ const dashboardController = require('../controllers/dashboard.js');
 const loginController = require('../controllers/login.js');
 const signupController = require('../controllers/signup.js');
 const profileController = require('../controllers/profile.js');
+const reportsController = require('../controllers/reports.js');
 
 
 module.exports = function(app, passport) {
@@ -20,6 +21,8 @@ module.exports = function(app, passport) {
   app.get('/profile', isLoggedIn, profileController.index);
   app.get('/profile/updatestore', isLoggedIn, profileController.updatestore);
   app.post('/profile/updatestore', isLoggedIn, profileController.saveStore);
+
+  app.get('/reports', isLoggedIn, reportsController.index);
 
   app.get('/login', loginController.index);
 
