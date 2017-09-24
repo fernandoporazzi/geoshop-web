@@ -12,12 +12,13 @@ function bindEvents() {
 function getOnlineUsers() {
   var socket = io.connect('http://localhost:3000/map'),
     storeId = GeoShop.storeId,
-    onlineQtyWrapper = document.getElementById('online-qty');
+    onlineQtyWrapper = document.getElementById('online-qty'),
+    cartValueWrapper = document.getElementById('cart-total');
 
   socket.emit('getOnlineUsers', {storeId: storeId});
+  socket.emit('getCartValueForOnlineUsers', {storeId: storeId});
 
   socket.on('updateOnlineUsers', function(response) {
-    console.log(response.data);
     onlineQtyWrapper.innerHTML = response.data.length;
 
     if (response.data.length) {
@@ -28,8 +29,13 @@ function getOnlineUsers() {
     }
   });
 
+  socket.on('updateCartValueForOnlineUsers', function(response) {
+    cartValueWrapper.innerText = 'R$ ' + response.data;
+  })
+
   setInterval(function() {
     socket.emit('getOnlineUsers', {storeId: storeId});
+    socket.emit('getCartValueForOnlineUsers', {storeId: storeId});
   }, 30000);
 }
 
@@ -87,7 +93,6 @@ function getInformationBySession(session) {
 }
 
 function openSessionModal(data) {
-  console.log('open modal', data)
   var htmlToInject = '<p><strong>Nome do usuário:</strong> '+data.userName+'</p>'+
     '<p><strong>Email do usuário:</strong> '+ data.userEmail+'</p>'+
     '<p><strong>Localização:</strong> '+data.lat + '/'+ data.lng +'</p>'+
