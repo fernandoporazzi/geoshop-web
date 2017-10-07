@@ -1,2 +1,49 @@
 .login-banner
-  background-image url('http://placehold.it/500x500')
+  background: -moz-linear-gradient(-45deg, rgba(212,228,239,1) 0%, $c4 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, $c4));
+  background: -webkit-linear-gradient(-45deg, rgba(212,228,239,1) 0%, $c4 100%);
+  background: -o-linear-gradient(-45deg, rgba(212,228,239,1) 0%, $c4 100%);
+  background: -ms-linear-gradient(-45deg, rgba(212,228,239,1) 0%, $c4 100%);
+  background: linear-gradient(135deg, rgba(212,228,239,1) 0%, $c4 100%);
+
+  display flex
+  justify-content space-around
+  align-items: center
+
+  div
+    width 25%
+    display inline-block
+    background rgba(255, 255,255, .3)
+    height: 200px
+    text-align center
+    color $c4
+    display flex
+    align-items center
+    justify-content: center
+
+.login-logo
+  display block
+  margin 30px auto 20px
+
+.login-link
+  color $c4
+  text-decoration: underline
+
+.login-form
+  display flex
+  flex-direction column
+  width 250px
+  margin 80px auto
+
+  input
+    height 37px
+    padding 0 10px
+    margin 5px 0
+
+  button
+    margin 5px 0
+    height 37px
+    background $c4
+    color $c0
+    border 0
+    cursor pointer

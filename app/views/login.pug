@@ -2,9 +2,20 @@ extends layout
 
 block content
   .w-35.h-100.fl
-    h1= title
-    form(action="/login" method="POST")
+    img(src="img/logo.png", class="w200 login-logo")
+    p.tc
+      span Faça login para continuar.
+      br 
+      span Não tem uma conta?
+      a(href="/signup" class="login-link") Clique aqui
+    form(action="/login" method="POST", class="login-form")
       input(name="email" type="text" placeholder="email")
       input(name="password" type="password" placeholder="senha")
       button(type="submit") Entrar
   .w-65.h-100.fl.bg-c.bg-nr.bgs-cover.login-banner
+    div
+      p Conheça seus clientes
+    div
+      p Saiba onde eles estão
+    div
+      p Saiba o que eles fazem na sua loja
