@@ -23,6 +23,7 @@ module.exports = function(app, passport) {
   app.post('/profile/updatestore', isLoggedIn, profileController.saveStore);
 
   app.get('/reports', isLoggedIn, reportsController.index);
+  app.get('/reports/data', isLoggedIn, reportsController.getData);
 
   app.get('/login', loginController.index);
 

@@ -3,5 +3,26 @@ extends layout
 block content
   include includes/header.pug
 
-  main.w-100.mi-h-100.bgc1.p15
-    h1 oi
+  main.w-100.mi-h-100.bgc1.p15.reports
+    .w300.bgc0.fl.br7.p10
+      h4 Buscar sessões por:
+      form(action="/reports/data", method="GET")
+        .w-100.mt25
+          label(class="fs13") Nome do produto
+          input(type="text", name="productCode", class="w-100")
+        .w-100.mt25
+          label(class="fs13") Nome do usuário
+          input(type="text", name="userName", class="w-100")
+        .w-100.mt25
+          .w-50.fl
+            input(type="radio", name="completed", value="false", id="not-completed")
+            label(class="fs13", for="not-completed") Não finalizadas
+          .w-50.fl
+            input(type="radio", name="completed", value="true", id="completed")
+            label(class="fs13", for="completed") Finalizadas
+        .w-100.mt25.fl
+          button(type="submit") Buscar
+    .bgc0.fr.br7.p10.reports-results
+      if sessions
+        each session in sessions
+          li= session.storeId
