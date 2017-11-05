@@ -8,6 +8,8 @@ var sessionSchema = mongoose.Schema({
   userEmail: String,
   lat: String,
   lng: String,
+  city: String,
+  uf: String,
   cart: [],
   navigation: [String],
   completed: Boolean

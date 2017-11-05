@@ -1,6 +1,7 @@
 // app/controllers/instrumentation.js
 
 const url = require('url');
+const axios = require('axios');
 const util = require('../util/geolocation.js');
 const OnlineModel = require('../models/online.js');
 const SessionModel = require('../models/session.js');
@@ -12,6 +13,24 @@ const imgdata = [
 ];
 
 const imgbuf = new Buffer(imgdata);
+
+function getUfAndCity(location) {
+  let city, uf;
+
+  for (let i = 0; i < location.length; i++) {
+    let self = location[i];
+
+    if (self.types.includes('administrative_area_level_2')) {
+      city = self.long_name;
+    }
+
+    if (self.types.includes('administrative_area_level_1')) {
+      uf = self.long_name;
+    }
+  }
+
+  return {city, uf};
+}
 
 function getCartObjects(query) {
   if (!query || query === '') return [];
@@ -72,19 +91,30 @@ module.exports = {
 
       if (!doc) {
         console.log('create new session document');
-        let session = new SessionModel({
-          session: req.query.s,
-          storeId: req.query.storeId,
-          userName: req.query.un,
-          userEmail: req.query.ue,
-          lat: req.query.lat,
-          lng: req.query.lng,
-          cart: cartData,
-          navigation: [req.query.p],
-          completed: req.query.completed || false
-        });
-
-        session.save();
+        
+        axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${req.query.lat},${req.query.lng}&sensor=true`)
+          .then( mapsResponse => {
+            const {city, uf} = getUfAndCity(mapsResponse.data.results[0].address_components);
+            
+            let session = new SessionModel({
+              session: req.query.s,
+              storeId: req.query.storeId,
+              userName: req.query.un,
+              userEmail: req.query.ue,
+              lat: req.query.lat,
+              lng: req.query.lng,
+              city: city,
+              uf: uf,
+              cart: cartData,
+              navigation: [req.query.p],
+              completed: req.query.completed || false
+            });
+    
+            session.save();
+          } )
+          .catch( error => {
+            console.log('get google maps error', error)
+          } );
       }
     });
 

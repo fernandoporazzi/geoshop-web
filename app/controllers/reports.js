@@ -7,11 +7,11 @@ function buildQuery(req) {
   console.log(req);
 
   if (req.productCode.trim() != '') {
-    query.productName = {$elemMatch: {code: req.productCode}};
+    query.cart = {$elemMatch: {code: req.productCode}};
   }
 
   if (req.userName.trim() != '') {
-    query.userName = req.userName;
+    query.userName = {$regex: '.*' + req.userName + '.*', $options: 'i' }
   }
 
   if (req.completed) {

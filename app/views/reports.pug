@@ -8,7 +8,7 @@ block content
       h4 Buscar sessões por:
       form(action="/reports/data", method="GET")
         .w-100.mt25
-          label(class="fs13") Nome do produto
+          label(class="fs13") Código do produto
           input(type="text", name="productCode", class="w-100")
         .w-100.mt25
           label(class="fs13") Nome do usuário
@@ -25,4 +25,4 @@ block content
     .bgc0.fr.br7.p10.reports-results
       if sessions
         each session in sessions
-          li= session.storeId
+          li= session.userName

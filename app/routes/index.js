@@ -11,6 +11,7 @@ const reportsController = require('../controllers/reports.js');
 
 module.exports = function(app, passport) {
 
+  //http://localhost:3000/__geoshop.gif?s=oioi1919-80d7-1237hdbdd-12345678ab&storeId=592b5076d963911d685751cf&un=henrique+silva&ue=henriquesilva@gmail.com&lat=-29.656589099999994&lng=-50.5744732&completed=false
   app.get('/__geoshop.gif', instrumentationController.index);
 
   app.get('/', homeController.index);
