@@ -25,6 +25,7 @@ module.exports = function(app, passport) {
 
   app.get('/reports', isLoggedIn, reportsController.index);
   app.get('/reports/data', isLoggedIn, reportsController.getData);
+  app.get('/reports/cities/:uf', reportsController.getCityByState);
 
   app.get('/login', loginController.index);
 

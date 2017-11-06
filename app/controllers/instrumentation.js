@@ -20,12 +20,14 @@ function getUfAndCity(location) {
   for (let i = 0; i < location.length; i++) {
     let self = location[i];
 
+    // city
     if (self.types.includes('administrative_area_level_2')) {
       city = self.long_name;
     }
 
+    // uf
     if (self.types.includes('administrative_area_level_1')) {
-      uf = self.long_name;
+      uf = self.short_name.toLowerCase();
     }
   }
 

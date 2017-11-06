@@ -1,5 +1,6 @@
 // app/controllers/reports.js
 const SessionModel = require('../models/session.js');
+const statesAndCities = require('../data/statesAndCities.json');
 
 function buildQuery(req) {
   let query = {};
@@ -12,6 +13,14 @@ function buildQuery(req) {
 
   if (req.userName.trim() != '') {
     query.userName = {$regex: '.*' + req.userName + '.*', $options: 'i' }
+  }
+
+  if (req.uf != '') {
+    query.uf = req.uf
+  }
+
+  if (req.city != '') {
+    query.city = req.city
   }
 
   if (req.completed) {
@@ -32,13 +41,24 @@ module.exports = {
       title: 'GeoShop - Relatórios',
       storeName: req.user.storeName,
       storeId: req.user._id,
-      isAuthenticated: req.isAuthenticated()
+      isAuthenticated: req.isAuthenticated(),
+      states: statesAndCities.estados
     });
   },
 
-  getData: (req, res, next) => {
-    
+  getCityByState: (req, res, next) => {
+    let cities;
+    for (let i = 0; i < statesAndCities.estados.length; i++) {
+      if (statesAndCities.estados[i].sigla.toLowerCase() === req.params.uf) {
+        cities = statesAndCities.estados[i];
+        break;
+      }
+    }
 
+    res.json({cities: cities});
+  },
+
+  getData: (req, res, next) => {
     SessionModel.find(buildQuery(req.query), 
     (err, docs) => {
       res.render('reports', {
@@ -46,6 +66,7 @@ module.exports = {
         storeName: req.user.storeName,
         storeId: req.user._id,
         isAuthenticated: req.isAuthenticated(),
+        states: statesAndCities.estados,
         sessions: docs
       })
     })

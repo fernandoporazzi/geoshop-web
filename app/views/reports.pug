@@ -10,19 +10,38 @@ block content
         .w-100.mt25
           label(class="fs13") Código do produto
           input(type="text", name="productCode", class="w-100")
+        
         .w-100.mt25
           label(class="fs13") Nome do usuário
           input(type="text", name="userName", class="w-100")
-        .w-100.mt25
+        
+        .w-100.mt25.fl
+          .w-50.fl
+            label(class="fs13", for="uf-select") Estado
+            select(name="uf", id="uf-select", class="js-uf-select")
+              option(value="")
+              each state in states
+                option(value=state.sigla.toLowerCase())= state.nome
+          .w-50.fl
+            label(class="fs13", for="cities-select") Cidade
+            select(name="city", id="cities-select", class="w-100 js-city-select")
+              option(value="")
+
+        .w-100.mt25.fl
           .w-50.fl
             input(type="radio", name="completed", value="false", id="not-completed")
             label(class="fs13", for="not-completed") Não finalizadas
           .w-50.fl
             input(type="radio", name="completed", value="true", id="completed")
             label(class="fs13", for="completed") Finalizadas
+        
         .w-100.mt25.fl
           button(type="submit") Buscar
+    
     .bgc0.fr.br7.p10.reports-results
       if sessions
         each session in sessions
           li= session.userName
+
+block js
+  script(src="/js/reports.js")
