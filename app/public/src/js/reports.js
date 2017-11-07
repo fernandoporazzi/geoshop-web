@@ -8,6 +8,14 @@ function bindEvents() {
         populateCitiesSelect(data);
       })
   }, false);
+
+  var $sessions = document.querySelectorAll('.js-session');
+
+  for (var i = 0; i < $sessions.length; i++) {
+    $sessions[i].addEventListener('click', function() {
+      this.classList.toggle('active');
+    }, false);
+  }
 }
 
 function populateCitiesSelect(data) {

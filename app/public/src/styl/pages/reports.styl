@@ -8,3 +8,58 @@
 
 .reports-results
   width calc(100% - 315px)
+
+  .session
+    padding 10px 10px
+    cursor pointer
+    border-bottom 1px solid #efefef
+
+    &:last-child
+      border 0
+
+    &:hover
+      background #fdfdd6
+
+    &.active
+      background #f7f7f7
+      .to-toggle
+        display block
+
+.always-visible
+  display flex
+  justify-content space-between
+
+  div
+    width 33.3333% 
+
+    &:last-child
+      text-align right
+
+.to-toggle
+  display none
+  padding 0 15px
+
+.reports-results-header
+  padding 10px 0
+
+.user-email
+  margin-top 20px
+  font-size 13px
+
+.visited-pages
+  margin-top 20px
+  font-size 13px
+  div
+    margin-top 15px
+
+.cart-entries
+  margin-top 20px
+  font-size 13px
+  li
+    display flex
+    justify-content space-between
+    padding 13px 0
+
+    div
+      &:first-child
+        width 50%

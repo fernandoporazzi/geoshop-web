@@ -3,7 +3,7 @@ extends layout
 block content
   include includes/header.pug
 
-  main.w-100.mi-h-100.bgc1.p15.reports
+  main.w-100.fl.bgc1.p15.reports
     .w300.bgc0.fl.br7.p10
       h4 Buscar sessões por:
       form(action="/reports/data", method="GET")
@@ -40,8 +40,40 @@ block content
     
     .bgc0.fr.br7.p10.reports-results
       if sessions
-        each session in sessions
-          li= session.userName
+        .reports-results-header
+          strong Resultados #{sessions.length}
+        
+        ul
+          each session in sessions
+            li.session.js-session
+              .always-visible
+                div= session.userName
+                div= (session.city ? session.city + '/' : '') + session.uf.toUpperCase()
+                div= (session.completed ? 'Finalizada' : 'Não finalizada')
+              .to-toggle
+                if session.userEmail != ''
+                  .user-email
+                    strong E-mail: 
+                    span= session.userEmail
 
+                .visited-pages
+                  strong Páginas visitadas
+                  div= session.navigation.join(' / ')
+
+                    //- each nav in session.navigation
+                      //- span  nav
+                
+                .cart-entries
+                  strong Produtos
+                  ul
+                    each entry in session.cart
+                      li
+                        div
+                          p= entry.name
+                          p= entry.code
+                        div= entry.price
+                        div= entry.quantity
+                        
+                        
 block js
   script(src="/js/reports.js")
