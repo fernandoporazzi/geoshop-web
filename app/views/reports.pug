@@ -4,7 +4,7 @@ block content
   include includes/header.pug
 
   main.w-100.fl.bgc1.p15.reports
-    .w300.bgc0.fl.br7.p10
+    .w300.bgc0.fl.br7.p10.reports-form-wrapper
       h4 Buscar sessões por:
       form(action="/reports/data", method="GET")
         .w-100.mt25
@@ -26,6 +26,14 @@ block content
             label(class="fs13", for="cities-select") Cidade
             select(name="city", id="cities-select", class="w-100 js-city-select")
               option(value="")
+        
+        .w-100.mt25.fl
+          label(class="fs13", for="last-page") Última página
+          select(name="lastpage", id="last-page", class="js-uf-select")
+            option(value="")
+            each page in pages
+              option(value=page)= page
+          
 
         .w-100.mt25.fl
           .w-50.fl
