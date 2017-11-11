@@ -33,7 +33,7 @@ function getCartValueForOnlineUsers(socket, data) {
           let entry = cartEntries[j];
 
           const qty = entry.quantity
-          const price = parseInt(entry.price.replace('R$', ''))
+          const price = parseInt(entry.price ? entry.price.replace('R$', '') : 400)
 
           totalPrice += (qty * price)
         }

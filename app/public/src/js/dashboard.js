@@ -30,7 +30,11 @@ function getOnlineUsers() {
   });
 
   socket.on('updateCartValueForOnlineUsers', function(response) {
-    cartValueWrapper.innerText = 'R$ ' + response.data;
+    if (response && response.data) {
+      cartValueWrapper.innerText = 'R$ ' + response.data;
+    } else {
+      cartValueWrapper.innerText = 'R$ 0';
+    }
   })
 
   setInterval(function() {

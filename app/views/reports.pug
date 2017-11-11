@@ -57,6 +57,8 @@ block content
               .always-visible
                 div= session.userName
                 div= (session.city ? session.city + '/' : '') + session.uf.toUpperCase()
+                - var date = new Date(session.created_at)
+                div= date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
                 div= (session.completed ? 'Finalizada' : 'Não finalizada')
               .to-toggle
                 if session.userEmail != ''
